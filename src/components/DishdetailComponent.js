@@ -6,32 +6,34 @@ export class DishDetailComponent extends Component {
         super(props);
 
     }
-
+    renderComments(comment) {
+        return (
+            <div key={comment.id}>
+                <p>{comment.comment}</p>
+                <p>-- {comment.author} , {comment.date}</p>
+            </div>
+        );
+    }
     render() {
         const dish = this.props.dish;
-        return (  
-                <div className='row'>
-                <Card className='col-5'>
+        return (
+            <div className='row'>
+                <Card className='col-12 col-md-5 m-1'>
                     <CardImg top src={dish.image} alt={dish.name} />
                     <CardBody>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardText>{dish.description}</CardText>
                     </CardBody>
                 </Card>
-                <div className='col-5 m-3'>
+                <div className='col-12 col-md-5 m-3'>
                     <h1>Comments</h1>
                     {this.props.dish.comments.map(
-                        comment =>{
-                            return(
-                                <div key={comment.id}>
-                                    <p>{comment.comment}</p>
-                                    <p>-- {comment.author} , {comment.date}</p>
-                                </div>
-                            );
+                        comment => {
+                            return this.renderComments(comment);
                         }
                     )}
                 </div>
-                </div>
+            </div>
         );
     }
 }
